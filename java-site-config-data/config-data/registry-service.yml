@@ -1,0 +1,13 @@
+server:
+    port: ${SERVER_PORT}
+eureka:
+    instance:
+        preferIpAddress: true
+        hostname: ${REGISTRY_SERVICE_HOST}
+        ipAddress: ${REGISTRY_SERVICE_HOST}
+        non-secure-port: 8080
+    client:
+        registerWithEureka: false
+        fetchRegistry: false
+        serviceUrl:
+            defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

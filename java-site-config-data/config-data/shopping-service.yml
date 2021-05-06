@@ -1,0 +1,98 @@
+server:
+  port: ${SERVER_PORT}
+  error:
+    include-message: always
+    include-binding-errors: always
+# ===============================
+# = DATA SOURCE
+# ===============================
+# Set here configurations for the database connection
+spring:
+  # cloud:
+    # loadbalancer:
+      # ribbon:
+        # enabled: false
+  datasource:
+    url: "jdbc:mariadb://${SHOPPING_SERVICE_HOST_DB}/${SHOPPING_SERVICE_DB}"
+    username: ${SHOPPING_SERVICE_USER_DB}
+    password: ${SHOPPING_SERVICE_USER_PASSWORD}
+    driverClassName: org.mariadb.jdbc.Driver
+    initialization-mode: always
+# Keep the connection alive if idle for a long time (needed in production)
+#spring.datasource.testWhileIdle=true
+#spring.datasource.validationQuery=SELECT 1
+# ===============================
+# = JPA / HIBERNATE
+# ===============================
+# Show or not log for each sql query
+  jpa:
+    database: mysql
+    show-sql: true
+# Hibernate ddl auto (create, create-drop, update): with "create-drop" the database
+# schema will be automatically created afresh for every start of application
+    hibernate:
+      ddl-auto: create-drop
+# Naming strategy
+# Allows Hibernate to generate SQL optimized for a particular DBMS
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB103Dialect
+        storage_engine: innodb
+
+logging:
+  level:
+    project:
+      user:
+        UserClient: DEBUG
+    root: WARN
+    org: 
+      springframework:
+        web: DEBUG
+      hibernate: ERROR
+
+#output to a temp_folder/file
+  file:
+    name: ${java.io.tmpdir}/application.log
+
+# Logging pattern for file
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%"
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${URL_EUREKA_SERVER}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    preferIpAddress: true
+    hostname: http://${SHOPPING_SERVICE_HOST}:${server.port}
+    ipAddress: ${SHOPPING_SERVICE_HOST}
+# To enable Hystrix in Feign
+Feign:
+  hystrix:
+    enabled: true
+# ribbon:
+  # eureka:
+    # enabled: false
+  # MaxAutoRetries: 3
+  # MaxAutoRetriesNextServer: 1
+  # ReadTimeout: 1000
+# hystrix:
+  # command:
+    # default:
+      # execution:
+        # isolation:
+          # thread:
+            # timeoutInMilliseconds: 10000
+management:
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"

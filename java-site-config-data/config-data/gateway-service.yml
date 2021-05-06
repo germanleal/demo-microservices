@@ -1,0 +1,27 @@
+#Application Configuration
+server:
+  port: ${SERVER_PORT}
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${URL_EUREKA_SERVER}
+  instance:
+    preferIpAddress: true
+    hostname: http://${GATEWAY_SERVICE_HOST}:${server.port}
+    ipAddress: ${GATEWAY_SERVICE_HOST}
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: customer-service
+          uri: lb://customer-service
+          predicates:
+            - Path=/customers/**
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/products/**
+        - id: shopping-service
+          uri: lb://shopping-service
+          predicates:
+            - Path=/invoices/**

@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: ${SERVICE_NAME}
+  cloud:
+    config:
+      uri: ${URL_CONFIGURATION_SERVICE}
+      username: ${USER_CONFIGURATION_SERVICE}
+      password: ${PASSWORD_CONFIGURATION_SERVICE}

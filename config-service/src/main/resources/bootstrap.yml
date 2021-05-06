@@ -1,0 +1,10 @@
+server:
+  port: ${SERVER_PORT}
+spring:
+  application:
+    name: ${SERVICE_NAME}  cloud:    config:      server:        git:          uri: ${GIT_REPOSITORY}
+          search-paths: ${SEARCH_PATH}
+          username: ${GIT_USER}
+          password: ${GIT_PASSWORD}
+  security:    user:      name: ${USER_CONFIGURATION_SERVICE}
+      password: ${PASSWORD_CONFIGURATION_SERVICE}
