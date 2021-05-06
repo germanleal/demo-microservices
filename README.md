@@ -14,8 +14,11 @@
 
 ### Config Service
 http://localhost:8090/customer-service/default
+
 http://localhost:8090/product-service/default
+
 http://localhost:8090/shopping-service/default
+
 http://localhost:8090/registry-service/default
 
 ### Discovery  Service (Eureka)
@@ -31,6 +34,7 @@ POST
 
 http://localhost:8091/products
 
+```json
 {
 	"name":"Producto demo",
 	"description":"Descripción producto demo",
@@ -38,6 +42,7 @@ http://localhost:8091/products
 	"price":30,
 	"category":{"id":1,"name": "demo"}
 }
+```
 
 ### Microservice Clientes
 GET
@@ -48,6 +53,7 @@ POST
 
 http://localhost:8092/customers
 
+```json
 {
 	"numberID":"40408083",
 	"firstName": "Pedro",
@@ -58,6 +64,7 @@ http://localhost:8092/customers
 		"id": 1
 	}
 }
+```
 
 ### Microservice Shopping
 GET
@@ -65,8 +72,10 @@ GET
 http://localhost:8093/invoices/
 
 POST
+
 http://localhost:8093/invoices/
 
+```json
 {
 	"numberInvoice": "002",
 	"description": "invoice store",
@@ -85,6 +94,7 @@ http://localhost:8093/invoices/
 		}
 	]
 }
+```
 
 ### Gateway 
 
