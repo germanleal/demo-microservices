@@ -9,6 +9,12 @@
 - Docker
 - Docker Compose
 
+## Configuraciones
+
+java-site-config-data
+
+Repositorio centralizado con los archivos de configuración para cada microservicio. 
+
 ## Servicios
 
 
